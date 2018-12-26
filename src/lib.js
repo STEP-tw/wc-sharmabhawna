@@ -13,7 +13,10 @@ const wc = function (usrInputs, readFileSync) {
     if (usrInputs[0] == "-l") {
         return [lineCount, fileName].join(" ");
     }
-    return [wordCount, fileName].join(" ");
+    if (usrInputs[0] == "-w") {
+        return [wordCount, fileName].join(" ");
+    }
+    return [byteCount, fileName].join(" ");
 };
 
 module.exports = { wc };

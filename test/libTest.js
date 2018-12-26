@@ -30,6 +30,11 @@ describe("wc", function () {
         let expectedOutput = "4 file1";
         equal(wc(["-w", "file1"], readFileSync), expectedOutput);
     });
+
+    it("should count bytes for single file when -c specified", function () {
+        let expectedOutput = "23 file1";
+        equal(wc(["-c", "file1"], readFileSync), expectedOutput);
+    });
 });
 
 module.exports = { wc };
