@@ -21,6 +21,22 @@ describe("parse", function () {
             let expectedOutput = { "option": "c", "files": ["file1"] };
             deepEqual(parse(["-c", "file1"]), expectedOutput);
         });
+
+        it("should parse -cl", function () {
+            let expectedOutput = { "option": "cl", "files": ["file1"] };
+            deepEqual(parse(["-cl", "file1"]), expectedOutput);
+        });
+
+        it("should parse -wl", function () {
+            let expectedOutput = { "option": "wl", "files": ["file1"] };
+            deepEqual(parse(["-wl", "file1"]), expectedOutput);
+        });
+
+        it("should parse -cw", function () {
+            let expectedOutput = { "option": "cw", "files": ["file1"] };
+            deepEqual(parse(["-cw", "file1"]), expectedOutput);
+        });
+
     });
 
     describe("for mutiple files", function () {

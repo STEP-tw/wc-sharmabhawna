@@ -17,7 +17,7 @@ const readFileSync = mockedReader(files, "utf8");
 
 describe("wc", function () {
     describe("for single file", function () {
-        it("should handle default arguments", function () {
+        it("should handle default options", function () {
             let parsedInputs = { "option": "lcw", "files": ["file1"] }
             let expectedOutput = "2 4 23 file1";
             equal(wc(parsedInputs, readFileSync), expectedOutput);
@@ -40,5 +40,25 @@ describe("wc", function () {
             let expectedOutput = "23 file1";
             equal(wc(parsedInputs, readFileSync), expectedOutput);
         });
+
+        it("should count lines and words when -wl specified", function () {
+            let parsedInputs = { "option": "wl", "files": ["file1"] }
+            let expectedOutput = "2 4 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
+
+        it("should count lines and words when -cl specified", function () {
+            let parsedInputs = { "option": "cl", "files": ["file1"] }
+            let expectedOutput = "2 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
+
+        it("should count lines and words when -cw specified", function () {
+            let parsedInputs = { "option": "cw", "files": ["file1"] }
+            let expectedOutput = "4 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
+
+
     });
 });

@@ -11,4 +11,8 @@ const splitBySpace = splitBy.bind("null", SPACE);
 
 const splitByEmptyString = splitBy.bind("null", EMPTY_String);
 
-module.exports = { splitByNewLine, splitBySpace, splitByEmptyString, splitByEmptyString };
+const isPresent = function (text, element) {
+    return text.split("").includes(element);
+};
+
+module.exports = { splitByNewLine, splitBySpace, splitByEmptyString, splitByEmptyString, isPresent };
