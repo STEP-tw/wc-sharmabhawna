@@ -37,6 +37,20 @@ describe("parse", function () {
             deepEqual(parse(["-cw", "file1"]), expectedOutput);
         });
 
+        it("should parse -cwl", function () {
+            let expectedOutput = { "option": "cwl", "files": ["file1"] };
+            deepEqual(parse(["-cwl", "file1"]), expectedOutput);
+        });
+
+        it("should parse -cw", function () {
+            let expectedOutput = { "option": "wcl", "files": ["file1"] };
+            deepEqual(parse(["-wcl", "file1"]), expectedOutput);
+        });
+
+        it("should parse -cw", function () {
+            let expectedOutput = { "option": "lcw", "files": ["file1"] };
+            deepEqual(parse(["-lcw", "file1"]), expectedOutput);
+        });
     });
 
     describe("for mutiple files", function () {

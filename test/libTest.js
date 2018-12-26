@@ -59,6 +59,23 @@ describe("wc", function () {
             equal(wc(parsedInputs, readFileSync), expectedOutput);
         });
 
+        it("should count lines, words and bytes when -cwl specified", function () {
+            let parsedInputs = { "option": "cwl", "files": ["file1"] }
+            let expectedOutput = "2 4 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
+
+        it("should count lines, words and bytes when -lcw specified", function () {
+            let parsedInputs = { "option": "lcw", "files": ["file1"] }
+            let expectedOutput = "2 4 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
+
+        it("should count lines, words and bytes when -wlc specified", function () {
+            let parsedInputs = { "option": "wlc", "files": ["file1"] }
+            let expectedOutput = "2 4 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
 
     });
 });
