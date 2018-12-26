@@ -12,29 +12,33 @@ const mockedReader = function (expectedFiles, expectedEnocoding) {
         }
     };
 };
-const files = { "file1": "I like\nwatching\ncricket" };
+const files = { "file1": "I like\nwatching\ncricket", "file2": "1 2 3\n4 5 6\n7 8 9" };
 const readFileSync = mockedReader(files, "utf8");
 
 describe("wc", function () {
-    it("should handle default arguments for single file", function () {
-        let expectedOutput = "2 4 23 file1";
-        equal(wc(["file1"], readFileSync), expectedOutput);
-    });
+    describe("for single file", function () {
+        it("should handle default arguments", function () {
+            let parsedInputs = { "option": "lcw", "files": ["file1"] }
+            let expectedOutput = "2 4 23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
 
-    it("should count lines for single file when -l specified", function () {
-        let expectedOutput = "2 file1";
-        equal(wc(["-l", "file1"], readFileSync), expectedOutput);
-    });
+        it("should count lines when -l specified", function () {
+            let parsedInputs = { "option": "l", "files": ["file1"] }
+            let expectedOutput = "2 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
 
-    it("should count words for single file when -w specified", function () {
-        let expectedOutput = "4 file1";
-        equal(wc(["-w", "file1"], readFileSync), expectedOutput);
-    });
+        it("should count words when -w specified", function () {
+            let parsedInputs = { "option": "w", "files": ["file1"] }
+            let expectedOutput = "4 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
 
-    it("should count bytes for single file when -c specified", function () {
-        let expectedOutput = "23 file1";
-        equal(wc(["-c", "file1"], readFileSync), expectedOutput);
+        it("should count bytes when -c specified", function () {
+            let parsedInputs = { "option": "c", "files": ["file1"] }
+            let expectedOutput = "23 file1";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
     });
 });
-
-module.exports = { wc };

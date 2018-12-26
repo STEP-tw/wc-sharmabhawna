@@ -30,11 +30,12 @@
   node ./wc.js -c -l -w file1 [file2]...
 */
 const { readFileSync } = require("fs");
+const { parse } = require("./src/parser.js");
 const { wc } = require("./src/lib.js");
 
 const main = function () {
-  let usrInputs = process.argv.slice(2);
-  console.log(wc(usrInputs, readFileSync));
+  let parsedInputs = parse(process.argv.slice(2));
+  console.log(wc(parsedInputs, readFileSync));
 };
 
 main();

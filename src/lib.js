@@ -1,22 +1,46 @@
-const wc = function (usrInputs, readFileSync) {
-    let fileName = usrInputs[usrInputs.length - 1];
-    let fileContent = readFileSync(fileName, "utf8");
-    let lineCount = fileContent.split("\n").length - 1;
+const { splitByNewLine, splitBySpace, splitByEmptyString, zip } = require("./util.js");
+
+const countLines = function (data) {
+    return splitByNewLine(data).length - 1;
+};
+
+const countWords = function (data) {
     const wordCounter = function (count, line) {
-        return count + line.split(" ").length;
+        return count + splitBySpace(line).length;
     };
-    let wordCount = fileContent.split("\n").reduce(wordCounter, 0);
-    let byteCount = fileContent.split("").length;
-    if (usrInputs.length == 1) {
-        return [lineCount, wordCount, byteCount, fileName].join(" ");
+    return splitByNewLine(data).reduce(wordCounter, 0);
+};
+
+const countBytes = function (data) {
+    return splitByEmptyString(data).length;
+};
+
+const getContent = function (fileName, reader) {
+    return reader(fileName, "utf8");
+};
+
+const getCounts = function (content) {
+    let lines = countLines(content);
+    let words = countWords(content);
+    let bytes = countBytes(content);
+    return { lines, words, bytes };
+};
+
+const wc = function (parsedInputs, readFileSync) {
+    let { option, files } = parsedInputs;
+    let fileName = files[0];
+    let content = getContent(fileName, readFileSync);
+    let { lines, words, bytes } = getCounts(content);
+    if (option == "l") {
+        return [lines, fileName].join(" ");
     }
-    if (usrInputs[0] == "-l") {
-        return [lineCount, fileName].join(" ");
+    if (option == "w") {
+        return [words, fileName].join(" ");
     }
-    if (usrInputs[0] == "-w") {
-        return [wordCount, fileName].join(" ");
+    if (option == "c") {
+        return [bytes, fileName].join(" ");
     }
-    return [byteCount, fileName].join(" ");
+    return [lines, words, bytes, fileName].join(" ");
 };
 
 module.exports = { wc };
