@@ -1,4 +1,4 @@
-const { splitByNewLine, splitBySpace, splitByEmptyString, isPresent } = require("./util.js");
+const { splitByNewLine, splitBySpace, isPresent } = require("./util.js");
 const { format } = require("./formatter.js");
 
 const countLines = function (data) {
@@ -13,7 +13,7 @@ const countWords = function (data) {
 };
 
 const countBytes = function (data) {
-    return splitByEmptyString(data).length;
+    return data.length;
 };
 
 const getContent = function (fileName, reader) {
