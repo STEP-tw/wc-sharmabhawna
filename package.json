@@ -1,0 +1,22 @@
+{
+  "name": "wc",
+  "version": "0.0.1",
+  "description": "behaves like in-built wc",
+  "main": "wc.js",
+  "scripts": {
+    "test": "nyc -r html mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/wc-sharmabhawna.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/wc-sharmabhawna/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/wc-sharmabhawna#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
