@@ -1,4 +1,4 @@
-/* 
+/*
   Usage:
   node ./wc.js file1
   node ./wc.js -l file1
@@ -29,3 +29,18 @@
   node ./wc.js -c -w -l file1 [file2]...
   node ./wc.js -c -l -w file1 [file2]...
 */
+const { readFileSync } = require("fs");
+
+const main = function () {
+  let fileName = process.argv[2];
+  let fileContent = readFileSync(fileName, "utf8");
+  let lineCount = fileContent.split("\n").length - 1;
+  const wordCounter = function (count, line) {
+    return count + line.split(" ").length;
+  };
+  let wordCount = fileContent.split("\n").reduce(wordCounter, 0) - 1;
+  let byteCount = fileContent.split("").length;
+  console.log("", lineCount, wordCount, byteCount, fileName);
+};
+
+main();
