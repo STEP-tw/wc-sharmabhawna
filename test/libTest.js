@@ -76,6 +76,12 @@ describe("wc", function () {
             let expectedOutput = "2 4 23 file1";
             equal(wc(parsedInputs, readFileSync), expectedOutput);
         });
-
+    });
+    describe("for multiple files", function () {
+        it("should handle default options", function () {
+            let parsedInputs = { "option": "lcw", "files": ["file1", "file2"] }
+            let expectedOutput = "2 4 23 file1\n2 9 17 file2\n4 13 40 total";
+            equal(wc(parsedInputs, readFileSync), expectedOutput);
+        });
     });
 });
