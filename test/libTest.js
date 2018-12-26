@@ -21,9 +21,14 @@ describe("wc", function () {
         equal(wc(["file1"], readFileSync), expectedOutput);
     });
 
-    it("should return count of lines for single file", function () {
+    it("should count lines for single file when -l specified", function () {
         let expectedOutput = "2 file1";
         equal(wc(["-l", "file1"], readFileSync), expectedOutput);
+    });
+
+    it("should count words for single file when -w specified", function () {
+        let expectedOutput = "4 file1";
+        equal(wc(["-w", "file1"], readFileSync), expectedOutput);
     });
 });
 
