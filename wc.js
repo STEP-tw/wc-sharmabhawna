@@ -33,9 +33,8 @@ const { readFileSync } = require("fs");
 const { wc } = require("./src/lib.js");
 
 const main = function () {
-  let fileName = process.argv[2];
-  let { lineCount, wordCount, byteCount } = wc(fileName, readFileSync);
-  console.log("", lineCount, wordCount, byteCount, fileName);
+  let usrInputs = process.argv.slice(2);
+  console.log(wc(usrInputs, readFileSync));
 };
 
 main();

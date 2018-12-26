@@ -16,9 +16,14 @@ const files = { "file1": "I like\nwatching\ncricket" };
 const readFileSync = mockedReader(files, "utf8");
 
 describe("wc", function () {
-    it("should handle default arguments for a single file", function () {
-        let expectedOutput = { "lineCount": 2, "wordCount": 4, "byteCount": 23 };
-        equal(wc("file1", readFileSync), expectedOutput);
+    it("should handle default arguments for single file", function () {
+        let expectedOutput = "2 4 23 file1";
+        equal(wc(["file1"], readFileSync), expectedOutput);
+    });
+
+    it("should return count of lines for single file", function () {
+        let expectedOutput = "2 file1";
+        equal(wc(["-l", "file1"], readFileSync), expectedOutput);
     });
 });
 
