@@ -1,2 +1,3 @@
-extract logic from main
-introduce new directory structure
+wc needs refactoring
+duplication is there
+small functions can be extracted
