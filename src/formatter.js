@@ -8,17 +8,16 @@ const format = function (countsDetails) {
         return singleFileFormater(countsDetails[0]);
     }
     let result = countsDetails.map(singleFileFormater);
-    let total = countsDetails.reduce(totaller, [0, 0, 0, 0]).concat("total").join(" ");
-    result = result.concat(total);
-    return result.join("\n");
+    let totalCounts = countsDetails.reduce(totalGenerator, [0, 0, 0]).concat("total").join(" ");
+    return result = result.concat(totalCounts).join("\n");
 };
 
-const totaller = function (total, { counts }) {
-    let totalCounts = [];
+const totalGenerator = function (accumulator, { counts }) {
+    let total = [];
     for (let index = 0; index < counts.length; index++) {
-        totalCounts = totalCounts.concat(total[index] + counts[index])
+        total = total.concat(accumulator[index] + counts[index])
     }
-    return totalCounts;
+    return total;
 };
 
 module.exports = { format };
