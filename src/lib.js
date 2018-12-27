@@ -20,25 +20,26 @@ const getContent = function (fileName, reader) {
     return reader(fileName, "utf8");
 };
 
+const extractCounts = function (content, options, counts, option) {
+    let requiredCounts = { "l": countLines, "w": countWords, "c": countBytes };
+    if (options.includes(option)) {
+        counts = counts.concat(requiredCounts[option](content));
+    }
+    return counts;
+};
+
 const getFileCount = function (readFileSync, option, fileName) {
     let content = getContent(fileName, readFileSync);
-    let counts = [];
-    if (isPresent(option, "l")) {
-        counts.push(countLines(content));
-    }
-    if (isPresent(option, "w")) {
-        counts.push(countWords(content));
-    }
-    if (isPresent(option, "c")) {
-        counts.push(countBytes(content));
-    }
-    return { fileName, counts };
+    let options = option.split("");
+    let countsExtractor = extractCounts.bind("null", content, options);
+    let counts = ["l", "w", "c"].reduce(countsExtractor, []);
+    return { fileName, counts }
 };
 
 const getFilesCounts = function (readFileSync, option, files) {
-    let countsExtractor = getFileCount.bind("null", readFileSync, option);
-    let countDetails = files.map(countsExtractor);
-    return format(countDetails);
+    let fileCount = getFileCount.bind("null", readFileSync, option);
+    let filesCountsDetail = files.map(fileCount);
+    return format(filesCountsDetail);
 };
 
 const wc = function (parsedInputs, readFileSync) {

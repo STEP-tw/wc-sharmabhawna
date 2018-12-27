@@ -1,16 +1,17 @@
 const { NEWLINE, SPACE } = require("./util/constants.js");
 
-const singleFileFormater = function (countDetails) {
-    let { fileName, counts } = countDetails;
+const singleFileFormater = function (fileCountsDetail) {
+    let { fileName, counts } = fileCountsDetail;
     return counts = counts.concat(fileName).join(SPACE);
 };
 
-const format = function (countsDetails) {
-    if (countsDetails.length == 1) {
-        return singleFileFormater(countsDetails[0]);
+const format = function (filesCountsDetail) {
+    if (filesCountsDetail.length == 1) {
+        let fileCountsDetail = filesCountsDetail[0];
+        return singleFileFormater(fileCountsDetail);
     }
-    let requiredOutput = countsDetails.map(singleFileFormater);
-    let totalCounts = countsDetails.reduce(totalGenerator).counts;
+    let requiredOutput = filesCountsDetail.map(singleFileFormater);
+    let totalCounts = filesCountsDetail.reduce(totalGenerator).counts;
     let total = totalCounts.concat("total").join(SPACE);
     return requiredOutput = requiredOutput.concat(total).join(NEWLINE);
 };
