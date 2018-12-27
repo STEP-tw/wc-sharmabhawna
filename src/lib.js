@@ -19,18 +19,14 @@ const getContent = function (fileName, reader) {
     return reader(fileName, "utf8");
 };
 
-const extractCounts = function (content, options, counts, option) {
+const extractCounts = function (content, options) {
     let requiredCounts = { "line": countLines, "word": countWords, "byte": countBytes };
-    if (options.includes(option)) {
-        counts = counts.concat(requiredCounts[option](content));
-    }
-    return counts;
+    return options.map((option) => requiredCounts[option](content));
 };
 
 const getFileCount = function (readFileSync, options, fileName) {
     let content = getContent(fileName, readFileSync);
-    let countsExtractor = extractCounts.bind("null", content, options);
-    let counts = ["line", "word", "byte"].reduce(countsExtractor, []);
+    let counts = extractCounts(content, options);
     return { fileName, counts }
 };
 

@@ -16,9 +16,14 @@ const isFile = function (input) {
     return !input.startsWith(HYPHEN);
 };
 
+const sortOptions = function (options) {
+    return ["l", "w", "c"].filter((x) => options.includes(x));
+};
+
 const extractOptions = function (usrInputs) {
     let options = { "l": "line", "w": "word", "c": "byte" };
-    return removeHyphen(usrInputs.filter(isOption).join(EMPTY_STRING)).map((x) => options[x]);
+    let userOptions = removeHyphen(usrInputs.filter(isOption).join(EMPTY_STRING));
+    return sortOptions(userOptions).map((x) => options[x]);
 };
 
 const extractFiles = function (usrInputs) {

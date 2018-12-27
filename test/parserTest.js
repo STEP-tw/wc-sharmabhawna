@@ -23,12 +23,12 @@ describe("parse", function () {
         });
 
         it("should parse any combination of two options specified together", function () {
-            let expectedOutput = { "options": ["byte", "word"], "files": ["file1"] };
+            let expectedOutput = { "options": ["word", "byte"], "files": ["file1"] };
             deepEqual(parse(["-cw", "file1"]), expectedOutput);
         });
 
         it("should parse any combination of three options specified together", function () {
-            let expectedOutput = { "options": ["line", "byte", "word"], "files": ["file1"] };
+            let expectedOutput = { "options": ["line", "word", "byte"], "files": ["file1"] };
             deepEqual(parse(["-lcw", "file1"]), expectedOutput);
         });
 
@@ -38,7 +38,7 @@ describe("parse", function () {
         });
 
         it("should parse any combination of three options specified seperately", function () {
-            let expectedOutput = { "options": ["byte", "line", "word"], "files": ["file1"] };
+            let expectedOutput = { "options": ["line", "word", "byte"], "files": ["file1"] };
             deepEqual(parse(["-c", "-l", "-w", "file1"]), expectedOutput);
         });
     });
@@ -64,12 +64,12 @@ describe("parse", function () {
         });
 
         it("should parse any combination of two options specified together", function () {
-            let expectedOutput = { "options": ["byte", "word"], "files": ["file1", "file2"] };
+            let expectedOutput = { "options": ["word", "byte"], "files": ["file1", "file2"] };
             deepEqual(parse(["-cw", "file1", "file2"]), expectedOutput);
         });
 
         it("should parse any combination of three options specified together", function () {
-            let expectedOutput = { "options": ["line", "byte", "word"], "files": ["file1", "file2"] };
+            let expectedOutput = { "options": ["line", "word", "byte"], "files": ["file1", "file2"] };
             deepEqual(parse(["-lcw", "file1", "file2"]), expectedOutput);
         });
 
@@ -79,7 +79,7 @@ describe("parse", function () {
         });
 
         it("should parse any combination of three options specified seperately", function () {
-            let expectedOutput = { "options": ["byte", "line", "word"], "files": ["file1", "file2"] };
+            let expectedOutput = { "options": ["line", "word", "byte"], "files": ["file1", "file2"] };
             deepEqual(parse(["-c", "-l", "-w", "file1", "file2"]), expectedOutput);
         });
     });
