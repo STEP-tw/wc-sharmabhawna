@@ -1,5 +1,4 @@
 const { splitByNewLine, splitBySpace } = require("./util/string.js");
-const { format } = require("./formatter.js");
 
 const countLines = function (data) {
     return splitByNewLine(data).length - 1;
@@ -38,8 +37,7 @@ const getFileCount = function (readFileSync, options, fileName) {
 const wc = function (parsedInputs, readFileSync) {
     let { options, files } = parsedInputs;
     let fileCountExtractor = getFileCount.bind("null", readFileSync, options);
-    let filesCounts = files.map(fileCountExtractor);
-    return format(filesCounts);
+    return files.map(fileCountExtractor);
 };
 
 module.exports = { wc };

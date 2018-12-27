@@ -32,10 +32,12 @@
 const { readFileSync } = require("fs");
 const { parse } = require("./src/parser.js");
 const { wc } = require("./src/lib.js");
+const { format } = require("./src/formatter.js");
 
 const main = function () {
   let parsedInputs = parse(process.argv.slice(2));
-  console.log(wc(parsedInputs, readFileSync));
+  let requiredCounts = wc(parsedInputs, readFileSync);
+  console.log(format(requiredCounts));
 };
 
 main();
