@@ -35,15 +35,11 @@ const getFileCount = function (readFileSync, options, fileName) {
     return { fileName, counts }
 };
 
-const getFilesCounts = function (readFileSync, options, files) {
-    let fileCount = getFileCount.bind("null", readFileSync, options);
-    let filesCountsDetail = files.map(fileCount);
-    return format(filesCountsDetail);
-};
-
 const wc = function (parsedInputs, readFileSync) {
     let { options, files } = parsedInputs;
-    return getFilesCounts(readFileSync, options, files);
+    let fileCountExtractor = getFileCount.bind("null", readFileSync, options);
+    let filesCountsDetail = files.map(fileCountExtractor);
+    return format(filesCountsDetail);
 };
 
 module.exports = { wc };
