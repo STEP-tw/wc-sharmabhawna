@@ -22,46 +22,25 @@ describe("parse", function () {
             deepEqual(parse(["-c", "file1"]), expectedOutput);
         });
 
-        it("should parse -cl", function () {
-            let expectedOutput = { "option": "cl", "files": ["file1"] };
-            deepEqual(parse(["-cl", "file1"]), expectedOutput);
-        });
-
-        it("should parse -wl", function () {
-            let expectedOutput = { "option": "wl", "files": ["file1"] };
-            deepEqual(parse(["-wl", "file1"]), expectedOutput);
-        });
-
-        it("should parse -cw", function () {
+        it("should parse any combination of two options specified together", function () {
             let expectedOutput = { "option": "cw", "files": ["file1"] };
             deepEqual(parse(["-cw", "file1"]), expectedOutput);
         });
 
-        it("should parse -cwl", function () {
-            let expectedOutput = { "option": "cwl", "files": ["file1"] };
-            deepEqual(parse(["-cwl", "file1"]), expectedOutput);
-        });
-
-        it("should parse -wcl", function () {
-            let expectedOutput = { "option": "wcl", "files": ["file1"] };
-            deepEqual(parse(["-wcl", "file1"]), expectedOutput);
-        });
-
-        it("should parse -lcw", function () {
+        it("should parse any combination of three options specified together", function () {
             let expectedOutput = { "option": "lcw", "files": ["file1"] };
             deepEqual(parse(["-lcw", "file1"]), expectedOutput);
         });
 
-        it("should parse -l -c", function () {
+        it("should parse any combination of two options specified seperately", function () {
             let expectedOutput = { "option": "lc", "files": ["file1"] };
             deepEqual(parse(["-l", "-c", "file1"]), expectedOutput);
         });
 
-        it("should parse -l -c -w", function () {
-            let expectedOutput = { "option": "lcw", "files": ["file1"] };
-            deepEqual(parse(["-l", "-c", "-w", "file1"]), expectedOutput);
+        it("should parse any combination of three options specified seperately", function () {
+            let expectedOutput = { "option": "clw", "files": ["file1"] };
+            deepEqual(parse(["-c", "-l", "-w", "file1"]), expectedOutput);
         });
-
     });
 
     describe("for mutiple files", function () {
@@ -82,6 +61,26 @@ describe("parse", function () {
         it("should parse -c", function () {
             let expectedOutput = { "option": "c", "files": ["file1", "file2"] };
             deepEqual(parse(["-c", "file1", "file2"]), expectedOutput);
+        });
+
+        it("should parse any combination of two options specified together", function () {
+            let expectedOutput = { "option": "cw", "files": ["file1", "file2"] };
+            deepEqual(parse(["-cw", "file1", "file2"]), expectedOutput);
+        });
+
+        it("should parse any combination of three options specified together", function () {
+            let expectedOutput = { "option": "lcw", "files": ["file1", "file2"] };
+            deepEqual(parse(["-lcw", "file1", "file2"]), expectedOutput);
+        });
+
+        it("should parse any combination of two options specified seperately", function () {
+            let expectedOutput = { "option": "lc", "files": ["file1", "file2"] };
+            deepEqual(parse(["-l", "-c", "file1", "file2"]), expectedOutput);
+        });
+
+        it("should parse any combination of three options specified seperately", function () {
+            let expectedOutput = { "option": "clw", "files": ["file1", "file2"] };
+            deepEqual(parse(["-c", "-l", "-w", "file1", "file2"]), expectedOutput);
         });
     });
 });
