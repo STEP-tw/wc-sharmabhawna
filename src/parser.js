@@ -1,11 +1,11 @@
 const { EMPTY_STRING, HYPHEN } = require("./util/constants.js");
 
-const isNotDash = function (element) {
+const isNotHyphen = function (element) {
     return element != HYPHEN;
 };
 
-const removeDash = function (text) {
-    return text.split(EMPTY_STRING).filter(isNotDash).join(EMPTY_STRING);
+const removeHyphen = function (text) {
+    return text.split(EMPTY_STRING).filter(isNotHyphen);
 };
 
 const isOption = function (input) {
@@ -17,7 +17,7 @@ const isFile = function (input) {
 };
 
 const extractOptions = function (usrInputs) {
-    return removeDash(usrInputs.filter(isOption).join(EMPTY_STRING));
+    return removeHyphen(usrInputs.filter(isOption).join(""));
 };
 
 const extractFiles = function (usrInputs) {
@@ -27,9 +27,9 @@ const extractFiles = function (usrInputs) {
 const parse = function (usrInputs) {
     firstArg = usrInputs[0];
     if (isFile(firstArg)) {
-        return { "option": "lwc", "files": usrInputs.slice(0) };
+        return { "options": ["l", "w", "c"], "files": usrInputs.slice(0) };
     }
-    return { "option": extractOptions(usrInputs), "files": extractFiles(usrInputs) };
+    return { "options": extractOptions(usrInputs), "files": extractFiles(usrInputs) };
 };
 
 module.exports = { parse };

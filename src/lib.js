@@ -28,23 +28,22 @@ const extractCounts = function (content, options, counts, option) {
     return counts;
 };
 
-const getFileCount = function (readFileSync, option, fileName) {
+const getFileCount = function (readFileSync, options, fileName) {
     let content = getContent(fileName, readFileSync);
-    let options = option.split("");
     let countsExtractor = extractCounts.bind("null", content, options);
     let counts = ["l", "w", "c"].reduce(countsExtractor, []);
     return { fileName, counts }
 };
 
-const getFilesCounts = function (readFileSync, option, files) {
-    let fileCount = getFileCount.bind("null", readFileSync, option);
+const getFilesCounts = function (readFileSync, options, files) {
+    let fileCount = getFileCount.bind("null", readFileSync, options);
     let filesCountsDetail = files.map(fileCount);
     return format(filesCountsDetail);
 };
 
 const wc = function (parsedInputs, readFileSync) {
-    let { option, files } = parsedInputs;
-    return getFilesCounts(readFileSync, option, files);
+    let { options, files } = parsedInputs;
+    return getFilesCounts(readFileSync, options, files);
 };
 
 module.exports = { wc };
