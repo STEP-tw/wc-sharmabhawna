@@ -1,6 +1,8 @@
+const { NEWLINE, SPACE } = require("./util.js");
+
 const singleFileFormater = function (countDetails) {
     let { fileName, counts } = countDetails;
-    return counts = counts.concat(fileName).join(" ");
+    return counts = counts.concat(fileName).join(SPACE);
 };
 
 const format = function (countsDetails) {
@@ -8,8 +10,8 @@ const format = function (countsDetails) {
         return singleFileFormater(countsDetails[0]);
     }
     let result = countsDetails.map(singleFileFormater);
-    let totalCounts = countsDetails.reduce(totalGenerator, [0, 0, 0]).concat("total").join(" ");
-    return result = result.concat(totalCounts).join("\n");
+    let totalCounts = countsDetails.reduce(totalGenerator, [0, 0, 0]).concat("total").join(SPACE);
+    return result = result.concat(totalCounts).join(NEWLINE);
 };
 
 const totalGenerator = function (accumulator, { counts }) {

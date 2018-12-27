@@ -1,8 +1,8 @@
 const NEWLINE = "\n";
 const SPACE = " ";
 
-const splitBy = function (seperator, data) {
-    return data.split(seperator);
+const splitBy = function (seperator, text) {
+    return text.split(seperator);
 };
 const splitByNewLine = splitBy.bind("null", NEWLINE);
 
