@@ -17,7 +17,8 @@ const isFile = function (input) {
 };
 
 const extractOptions = function (usrInputs) {
-    return removeHyphen(usrInputs.filter(isOption).join(""));
+    let options = { "l": "line", "w": "word", "c": "byte" };
+    return removeHyphen(usrInputs.filter(isOption).join(EMPTY_STRING)).map((x) => options[x]);
 };
 
 const extractFiles = function (usrInputs) {
@@ -27,7 +28,7 @@ const extractFiles = function (usrInputs) {
 const parse = function (usrInputs) {
     firstArg = usrInputs[0];
     if (isFile(firstArg)) {
-        return { "options": ["l", "w", "c"], "files": usrInputs.slice(0) };
+        return { "options": ["line", "word", "byte"], "files": usrInputs.slice(0) };
     }
     return { "options": extractOptions(usrInputs), "files": extractFiles(usrInputs) };
 };

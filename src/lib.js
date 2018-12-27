@@ -20,7 +20,7 @@ const getContent = function (fileName, reader) {
 };
 
 const extractCounts = function (content, options, counts, option) {
-    let requiredCounts = { "l": countLines, "w": countWords, "c": countBytes };
+    let requiredCounts = { "line": countLines, "word": countWords, "byte": countBytes };
     if (options.includes(option)) {
         counts = counts.concat(requiredCounts[option](content));
     }
@@ -30,7 +30,7 @@ const extractCounts = function (content, options, counts, option) {
 const getFileCount = function (readFileSync, options, fileName) {
     let content = getContent(fileName, readFileSync);
     let countsExtractor = extractCounts.bind("null", content, options);
-    let counts = ["l", "w", "c"].reduce(countsExtractor, []);
+    let counts = ["line", "word", "byte"].reduce(countsExtractor, []);
     return { fileName, counts }
 };
 
