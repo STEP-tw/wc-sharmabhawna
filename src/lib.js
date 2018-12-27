@@ -1,4 +1,4 @@
-const { splitByNewLine, splitBySpace, isPresent } = require("./util.js");
+const { splitByNewLine, splitBySpace, isPresent } = require("./util/string.js");
 const { format } = require("./formatter.js");
 
 const countLines = function (data) {

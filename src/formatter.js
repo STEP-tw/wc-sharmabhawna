@@ -1,4 +1,4 @@
-const { NEWLINE, SPACE } = require("./util.js");
+const { NEWLINE, SPACE } = require("./util/constants.js");
 
 const singleFileFormater = function (countDetails) {
     let { fileName, counts } = countDetails;

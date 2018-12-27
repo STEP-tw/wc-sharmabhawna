@@ -1,21 +1,23 @@
+const { EMPTY_STRING, HYPHEN } = require("./util/constants.js");
+
 const isNotDash = function (element) {
-    return element != "-";
+    return element != HYPHEN;
 };
 
 const removeDash = function (text) {
-    return text.split("").filter(isNotDash).join("");
+    return text.split(EMPTY_STRING).filter(isNotDash).join(EMPTY_STRING);
 };
 
 const isOption = function (input) {
-    return input.startsWith("-");
+    return input.startsWith(HYPHEN);
 };
 
 const isFile = function (input) {
-    return !input.startsWith("-");
+    return !input.startsWith(HYPHEN);
 };
 
 const extractOptions = function (usrInputs) {
-    return removeDash(usrInputs.filter(isOption).join(""));
+    return removeDash(usrInputs.filter(isOption).join(EMPTY_STRING));
 };
 
 const extractFiles = function (usrInputs) {
