@@ -5,15 +5,19 @@ const singleFileFormater = function (fileCounts) {
     return counts = counts.concat(fileName).join(SPACE);
 };
 
+const appendTotal = function (requiredOutput, filesCounts) {
+    let totalCounts = filesCounts.reduce(totalGenerator).counts;
+    let total = totalCounts.concat("total").join(SPACE);
+    return requiredOutput = requiredOutput.concat(total).join(NEWLINE);
+};
+
 const format = function (filesCounts) {
     if (filesCounts.length == 1) {
         let fileCounts = filesCounts[0];
         return singleFileFormater(fileCounts);
     }
     let requiredOutput = filesCounts.map(singleFileFormater);
-    let totalCounts = filesCounts.reduce(totalGenerator).counts;
-    let total = totalCounts.concat("total").join(SPACE);
-    return requiredOutput = requiredOutput.concat(total).join(NEWLINE);
+    return appendTotal(requiredOutput, filesCounts);
 };
 
 const totalGenerator = function (accumulator, { counts }) {
