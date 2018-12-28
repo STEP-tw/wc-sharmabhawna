@@ -1,15 +1,20 @@
 const { EMPTY_STRING, HYPHEN } = require("./util/constants.js");
 
+const createFormat = function (options, files) {
+    return { options, files };
+};
+
+const getFirstFileIndex = function (usrInputs) {
+    let allFiles = usrInputs.filter(isFile);
+    return usrInputs.indexOf(allFiles[0]);
+};
+
 const isNotHyphen = function (element) {
     return element != HYPHEN;
 };
 
-const removeHyphen = function (text) {
-    return text.split(EMPTY_STRING).filter(isNotHyphen);
-};
-
-const isOption = function (input) {
-    return input.startsWith(HYPHEN);
+const removeHyphens = function (list) {
+    return list.join(EMPTY_STRING).split(EMPTY_STRING).filter(isNotHyphen);
 };
 
 const isFile = function (input) {
@@ -22,20 +27,24 @@ const sortOptions = function (options) {
 
 const extractOptions = function (usrInputs) {
     let options = { "l": "line", "w": "word", "c": "byte" };
-    let userOptions = removeHyphen(usrInputs.filter(isOption).join(EMPTY_STRING));
+    let startingFileIndex = getFirstFileIndex(usrInputs);
+    let userOptions = removeHyphens(usrInputs.slice(0, startingFileIndex));
     return sortOptions(userOptions).map((x) => options[x]);
 };
 
 const extractFiles = function (usrInputs) {
-    return usrInputs.filter(isFile);
+    let startingFileIndex = getFirstFileIndex(usrInputs);
+    return usrInputs.slice(startingFileIndex);
 };
 
 const parse = function (usrInputs) {
     firstArg = usrInputs[0];
+    let options = extractOptions(usrInputs);
+    let files = extractFiles(usrInputs);
     if (isFile(firstArg)) {
-        return { "options": ["line", "word", "byte"], "files": usrInputs.slice(0) };
+        options = ["line", "word", "byte"];
     }
-    return { "options": extractOptions(usrInputs), "files": extractFiles(usrInputs) };
+    return createFormat(options, files);
 };
 
 module.exports = { parse };
