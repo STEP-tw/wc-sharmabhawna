@@ -6,7 +6,7 @@ const countLines = function (data) {
 
 const countWords = function (data) {
     const wordCounter = function (count, line) {
-        return count + splitBySpace(line).length;
+        return count + splitBySpace(line).filter((x) => x != "").length;
     };
     return splitByNewLine(data).reduce(wordCounter, 0);
 };
