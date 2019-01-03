@@ -29,15 +29,13 @@
   node ./wc.js -c -w -l file1 [file2]...
   node ./wc.js -c -l -w file1 [file2]...
 */
-const { readFileSync } = require("fs");
+const { readFile } = require("fs");
 const { parse } = require("./src/parser.js");
 const { wc } = require("./src/lib.js");
-const { format } = require("./src/formatter.js");
 
-const main = function () {
-  let parsedInputs = parse(process.argv.slice(2));
-  let requiredCounts = wc(parsedInputs, readFileSync);
-  console.log(format(requiredCounts));
+const main = function() {
+	let parsedInputs = parse(process.argv.slice(2));
+	wc(parsedInputs, readFile, console);
 };
 
 main();
